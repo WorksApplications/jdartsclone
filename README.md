@@ -1,5 +1,7 @@
 # jdartsclone
 
+[![Build Status](https://travis-ci.org/WorksApplications/jdartsclone.svg?branch=develop)](https://travis-ci.org/WorksApplications/jdartsclone)
+
 jdartsclone is a port of the original Darts-clone to Java.
 Darts-clone is a library of TRIE structure using Double-Array.
 
