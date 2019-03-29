@@ -26,7 +26,7 @@ You can find details in the Javadoc.
 
 ## Licenses
 
-Darts-clone-j by Works Applications Co., Ltd. is licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
+jdartsclone by Works Applications Co., Ltd. is licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 
    Copyright (c) 2017 Works Applications Co., Ltd.
 
