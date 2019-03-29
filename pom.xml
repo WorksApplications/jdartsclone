@@ -24,6 +24,37 @@
           <compilerArgument>${compilerArgument}</compilerArgument>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <source>${java.version}</source>
+          <locale>en_US</locale>
+          <show>public</show>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -39,16 +70,19 @@
   <url>https://github.com/WorksApplications/jdartsclone</url>
   <description>A library of TRIE structure using Double-Array</description>
   <inceptionYear>2017</inceptionYear>
+
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0</url>
     </license>
   </licenses>
+
   <organization>
     <name>Works Applications Co., Ltd.</name>
     <url>http://www.worksap.com/</url>
   </organization>
+
   <developers>
     <developer>
       <id>kazuma-t</id>
@@ -57,6 +91,7 @@
       <timezone>Asia/Tokyo</timezone>
     </developer>
   </developers>
+
   <issueManagement>
     <system>GitHub Issues</system>
     <url>https://github.com/WorksApplications/jdartsclone/issues</url>
@@ -66,5 +101,16 @@
     <developerConnection>scm:git:git@github.com:WorksApplications/jdartsclone.git</developerConnection>
     <url>https://github.com/WorksApplications/jdartsclone</url>
   </scm>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
 </project>
