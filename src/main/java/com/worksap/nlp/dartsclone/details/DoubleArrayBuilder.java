@@ -16,6 +16,7 @@
 
 package com.worksap.nlp.dartsclone.details;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class DoubleArrayBuilder {
         for (DoubleArrayBuilderUnit u : units) {
             buffer.putInt(u.unit);
         }
-        buffer.rewind();
+        ((Buffer)buffer).rewind();
         return buffer;
     }
 
