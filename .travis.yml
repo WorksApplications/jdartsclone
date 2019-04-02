@@ -1,6 +1,17 @@
 language: java
 jdk: oraclejdk8
 sudo: false
+before_install:
+  - openssl aes-256-cbc -K $encrypted_7726a8800684_key -iv $encrypted_7726a8800684_iv -in .travis/settings.xml.enc -out .travis/settings.xml -d
+  - openssl aes-256-cbc -K $encrypted_7726a8800684_key -iv $encrypted_7726a8800684_iv -in .travis/codesigning.asc.enc -out .travis/codesigning.asc -d
+dd:
+  - gpg --fast-import .travis/signingkey.asc
 install: true
 script:
   - mvn clean test -B
+deploy:
+  - provider: script
+    script: mvn clean deploy -P release -B --settings .travis/settings.xml
+    skip_cleanup: true
+    on:
+      branch: develop
