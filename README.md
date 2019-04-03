@@ -23,6 +23,15 @@ Darts-clone has the following features.
 
 You can find details in the Javadoc.
 
+To compile an application with jdartsclone, declare a dependency on it in maven project.
+
+```
+<dependency>
+  <groupId>com.worksap.nlp</groupId>
+  <artifactId>jdartsclone</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
 
 ## Licenses
 
