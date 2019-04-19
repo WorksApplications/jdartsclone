@@ -29,7 +29,7 @@ To compile an application with jdartsclone, declare a dependency on it in maven 
 <dependency>
   <groupId>com.worksap.nlp</groupId>
   <artifactId>jdartsclone</artifactId>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
