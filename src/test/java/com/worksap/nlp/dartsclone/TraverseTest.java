@@ -78,4 +78,12 @@ public class TraverseTest {
         assertTrue(r2.result >= 0);
         assertEquals(1, r2.offset);
     }
+
+    @Test
+    public void traverseWithLength() {
+        DoubleArray.TraverseResult r = dic.traverse(AB, 0, 1, 0);
+        assertTrue(r.result >= 0);
+        assertEquals(1, r.offset);
+    }
+
 }

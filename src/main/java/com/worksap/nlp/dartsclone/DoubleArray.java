@@ -265,6 +265,49 @@ public class DoubleArray {
      * If {@code offset} is not 0, the key is evaluated as the sub array
      * removed the first {@code offset} bytes.
      *
+     * If {@code end} is smaller than {@code key.length}, the remains are
+     * ignored.
+     *
+     * Returns -1 as the value if a traverse is failed at the end of the key,
+     * or -2 at a middle of the key.
+     *
+     * @param key the key whose associated value is to be returned
+     * @param offset the offset of the key
+     * @param length the end of the key
+     * @param nodePosition the node to start a traverse
+     * @return the value to which the specified key is mapped,
+     *         the offset of the key, and the node after the traverse
+     */
+    public TraverseResult traverse(byte[] key, int offset, int length, int nodePosition) {
+        int nodePos = nodePosition;
+        int id = nodePos;
+        int unit = array.get(id);
+
+        for (int i = offset; i < length; i++) {
+            byte k = key[i];
+            id ^= offset(unit) ^ Byte.toUnsignedInt(k);
+            unit = array.get(id);
+            if (label(unit) != Byte.toUnsignedInt(k)) {
+                return new TraverseResult(-2, i, nodePos);
+            }
+            nodePos = id;
+        }
+        if (!hasLeaf(unit)) {
+            return new TraverseResult(-1, length, nodePos);
+        }
+        unit = array.get(nodePos ^ offset(unit));
+        return new TraverseResult(value(unit), length, nodePos);
+    }
+
+    /**
+     * Returns the value to which the specified key is mapped by
+     * traversing the trie from the specified node.
+     *
+     * If {@code node} is 0, starts traversing from the root node.
+     *
+     * If {@code offset} is not 0, the key is evaluated as the sub array
+     * removed the first {@code offset} bytes.
+     *
      * Returns -1 as the value if a traverse is failed at the end of the key,
      * or -2 at a middle of the key.
      *
@@ -275,24 +318,7 @@ public class DoubleArray {
      *         the offset of the key, and the node after the traverse
      */
     public TraverseResult traverse(byte[] key, int offset, int nodePosition) {
-        int nodePos = nodePosition;
-        int id = nodePos;
-        int unit = array.get(id);
-
-        for (int i = offset; i < key.length; i++) {
-            byte k = key[i];
-            id ^= offset(unit) ^ Byte.toUnsignedInt(k);
-            unit = array.get(id);
-            if (label(unit) != Byte.toUnsignedInt(k)) {
-                return new TraverseResult(-2, i, nodePos);
-            }
-            nodePos = id;
-        }
-        if (!hasLeaf(unit)) {
-            return new TraverseResult(-1, key.length, nodePos);
-        }
-        unit = array.get(nodePos ^ offset(unit));
-        return new TraverseResult(value(unit), key.length, nodePos);
+        return traverse(key, offset, key.length, nodePosition);
     }
 
     private class Itr implements Iterator<int[]> {
